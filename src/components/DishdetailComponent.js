@@ -13,7 +13,7 @@ import { Card, CardBody, CardImg, CardImgOverlay,
                             <CardImgOverlay>
                                 <CardTitle>{dish.name}</CardTitle>
                             </CardImgOverlay>
-                            <CardText>{dish.description}</CardText>
+                            <CardText>{dish.comments}</CardText>
                         </CardBody>
                     </Card>
                 </Fragment>
@@ -27,7 +27,7 @@ import { Card, CardBody, CardImg, CardImgOverlay,
         }
     }
 
-    function RenderComments({dish}){
+    function RenderComments(dish){
         if (dish.comments != null){
             return(
                 <Fragment>
@@ -62,7 +62,7 @@ import { Card, CardBody, CardImg, CardImgOverlay,
                         <RenderDish dish={props.dish} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments dish={props.dish} />
+                        <RenderComments comments={props.dish} />
                     </div>
                 </div>
 
