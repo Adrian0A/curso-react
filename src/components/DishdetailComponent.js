@@ -3,21 +3,22 @@ import { Card, CardBody, CardImg, CardImgOverlay,
     CardText, CardTitle, ListGroup, ListGroupItem } from 'reactstrap';
 
 
-    function RenderDish({dish}){
-        if (dish != null){
+    function RenderDish({id,image, name, title, description}){
+        
+        if (id!=null){
             return(
                 <Fragment>
                     <Card>
-                        <CardImg top src={dish.image} alt={dish.name} />
+                        <CardImg top src={image} alt={name} />
                         <CardBody>
                             <CardImgOverlay>
-                                <CardTitle>{dish.name}</CardTitle>
+                                <CardTitle>{title}</CardTitle>
                             </CardImgOverlay>
-                            <CardText>{dish.comments}</CardText>
+                            <CardText>{description}</CardText>
                         </CardBody>
                     </Card>
                 </Fragment>
-            );
+            ); 
         }
 
         else{
@@ -27,13 +28,13 @@ import { Card, CardBody, CardImg, CardImgOverlay,
         }
     }
 
-    function RenderComments(dish){
-        if (dish.comments != null){
+    function RenderComments({comments}){
+        if (comments != null){
             return(
                 <Fragment>
                     <h4>Comments</h4>
                     <ListGroup>
-                        { dish.comments.map((comment)=>{
+                        { comments.map((comment)=>{
                             return(
                                 <Fragment>
                                     <ListGroupItem>
@@ -59,13 +60,12 @@ import { Card, CardBody, CardImg, CardImgOverlay,
             <div className="container">
                 <div className="row"    >
                     <div className="col-12 col-md-5 m-1">
-                        <RenderDish dish={props.dish} />
+                        <RenderDish {...props.dish} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments comments={props.dish} />
+                        <RenderComments {...props.dish} />
                     </div>
                 </div>
-
             </div>
             
         );
