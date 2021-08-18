@@ -6,13 +6,33 @@ import { Card, CardImg, CardText, CardBody,
         Input, FormGroup, Form, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, Errors, LocalForm}  from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 
 
 
 
 
-    function RenderDish({dish}){
-        
+    function RenderDish({dish, isLoading, errMess}){
+
+        if (isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (errMess) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <h4>{errMess}</h4>
+                    </div>
+                </div>
+            );
+        }
+        else if (dish != null)
             return(
                 <Fragment>
                     <Card>
@@ -111,9 +131,9 @@ import { Control, Errors, LocalForm}  from 'react-redux-form';
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="yourname" md={2}>Your Name</Label>
+                                <Label htmlFor="author" md={2}>Your Name</Label>
                                 <Col md={10}>
-                                    <Control.text model=".yourname" id="yourname" name="yourname"
+                                    <Control.text model=".author" id="author" name="author"
                                         placeholder="Your Name"
                                         className="form-control"
                                         validators={{
@@ -122,7 +142,7 @@ import { Control, Errors, LocalForm}  from 'react-redux-form';
                                          />
                                     <Errors
                                         className="text-danger"
-                                        model=".yourname"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             required: 'Required',
@@ -167,7 +187,9 @@ import { Control, Errors, LocalForm}  from 'react-redux-form';
             </div>
             <div className="row">
                 <div className="col-12 col-md-5 m-1">
-                    <RenderDish dish={props.dish} />
+                    <RenderDish dish={props.dish}
+                    isLoading={this.props.isLoading}
+                    errMess={this.props.errMess} />
                 </div>
                 <div className="col-12 col-md-5 m-1">
                    <RenderComments comments={props.comments}
