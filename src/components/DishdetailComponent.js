@@ -7,8 +7,7 @@ import { Card, CardImg, CardText, CardBody,
 import { Link } from 'react-router-dom';
 import { Control, Errors, LocalForm}  from 'react-redux-form';
 import { Loading } from './LoadingComponent';
-
-
+import {baseUrl} from '../shared/baseUrl';
 
 
 
@@ -36,7 +35,7 @@ import { Loading } from './LoadingComponent';
             return(
                 <Fragment>
                     <Card>
-                        <CardImg top src={dish.image} alt={dish.name} />
+                        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                         <CardBody>
                             <CardImgOverlay>
                                 <CardTitle>{dish.title}</CardTitle>
@@ -178,23 +177,23 @@ import { Loading } from './LoadingComponent';
                 <Breadcrumb>
 
                     <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    <BreadcrumbItem active>{props.name}</BreadcrumbItem>
                 </Breadcrumb>
                 <div className="col-12">
-                    <h3>{props.dish.name}</h3>
+                    <h3>{props.name}</h3>
                     <hr />
                 </div>                
             </div>
             <div className="row">
                 <div className="col-12 col-md-5 m-1">
                     <RenderDish dish={props.dish}
-                    isLoading={this.props.isLoading}
-                    errMess={this.props.errMess} />
+                    isLoading={props.isLoading}
+                    errMess={props.errMess} />
                 </div>
                 <div className="col-12 col-md-5 m-1">
                    <RenderComments comments={props.comments}
                     addComment={props.addComment}
-                    dishId={props.dish.id}
+                    dishId={props.id}
                     />
                     
                 </div>
